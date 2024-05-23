@@ -28,3 +28,4 @@ C:\Users\ASUS\source\repos\ECommerce\Core\ECommerce.Application\obj\Debug\net8.0
 C:\Users\ASUS\source\repos\ECommerce\Core\ECommerce.Application\obj\Debug\net8.0\refint\ECommerce.Application.dll
 C:\Users\ASUS\source\repos\ECommerce\Core\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.pdb
 C:\Users\ASUS\source\repos\ECommerce\Core\ECommerce.Application\obj\Debug\net8.0\ref\ECommerce.Application.dll
+C:\Users\ASUS\source\repos\ECommerce\Core\ECommerce.Application\obj\Debug\net8.0\ECommerce.Application.sourcelink.json

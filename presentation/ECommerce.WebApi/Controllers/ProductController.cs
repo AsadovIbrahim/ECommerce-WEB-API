@@ -30,6 +30,7 @@ public class ProductController : ControllerBase
 
         var allProductVm = prodcutForPage.Select(p => new AllProductVM()
         {
+            Id=p.Id,
             Name = p.Name,
             Price = p.Price,
             Description = p.Description,
@@ -61,5 +62,46 @@ public class ProductController : ControllerBase
         return StatusCode(201);
     }
 
+    [HttpDelete("DeleteProduct/{id}")]
+    public async Task<IActionResult>DeleteProduct(int id)
+    {
+        var data = await _readProductRepo.GetByIdAsync(id);
+        if (data == null)
+        {
+            return NotFound();
+        }
+        await _writeProductRepo.DeleteAsync(data);
+        await _writeProductRepo.SaveChangeAsync();
 
+        return Ok();
+    }
+    [HttpPut("UpdateProduct/{id}")]
+    public async Task<IActionResult>UpdateProduct(int id, [FromBody]UpdateProductVM updateProductVM)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var product = await _readProductRepo.GetByIdAsync(id);
+        if(product== null)
+        {
+            return NotFound();
+        }
+        var category=await _readProductRepo.GetByIdAsync(updateProductVM.CategoryId);
+        if (category == null)
+        {
+            return NotFound("Category Not Found!");
+        }
+        product.Name = updateProductVM.Name;
+        product.Price = updateProductVM.Price;
+        product.Description = updateProductVM.Description;
+        product.CategoryId= updateProductVM.CategoryId;
+
+        await _writeProductRepo.UpdateAsync(product);
+        await _writeProductRepo.SaveChangeAsync();
+
+        return Ok();
+
+
+    }
 }
